@@ -85,9 +85,13 @@ export default {
   name: 'RecipeView',
 	computed: {
 		recipe () {
-			return this.$store.state.recipes.find(recipe => recipe.idMeal === this.$route.params.idMeal)
+			return this.$store.getters.recipes.find(recipe => recipe.idMeal === this.$route.params.idMeal)
 		}
 	},
+  created() {
+    if(this.recipe === undefined)
+      this.$store.dispatch('getRecipes', '');
+  }
 }
 </script>
 
