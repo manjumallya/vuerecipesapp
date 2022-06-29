@@ -1,4 +1,14 @@
 <template>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <a class="navbar-brand" href="#">
+      <router-link to="/">Go to Home</router-link>
+    </a>
+    <a class="navbar-brand">
+      <router-link to="/category">Categories</router-link>
+    </a>
+    </div>
+  </nav>
   <router-view/>
 </template>
 

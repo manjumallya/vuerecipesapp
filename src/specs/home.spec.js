@@ -1,5 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Home from '../views/Home.vue';
+import { createRouter, createWebHistory } from 'vue-router'
+import { routes } from "../router/index"
 import axios from 'axios'
 import Vuex from 'vuex'
 import SearchBar from '../components/search-bar';
@@ -66,9 +68,14 @@ describe('Home.vue', () => {
     let state
     let getters
     let wrapper
+    let router;
     const recipeMock = jest.fn();
     recipeMock.mockReturnValue(mockRecipieList);
     beforeEach(() => {
+        router = createRouter({
+            history: createWebHistory(),
+            routes: routes,
+        })
         state = { data: {recipes: []} }
         actions = {
             getRecipes: jest.fn()
@@ -87,6 +94,7 @@ describe('Home.vue', () => {
                 provide: {
                     store: store
                 },
+                plugins: [router]
             },
         })
     })
