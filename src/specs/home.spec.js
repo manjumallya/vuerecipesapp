@@ -97,6 +97,7 @@ describe('Home.vue', () => {
                 plugins: [router]
             },
         })
+        jest.spyOn(wrapper.vm, 'handleSearch').mockResolvedValue(mockRecipieList)
     })
 
     test('Home component', () => {
@@ -106,8 +107,11 @@ describe('Home.vue', () => {
         expect(wrapper.vm.recipieData).toEqual(mockRecipieList)
     })
 
-    test('check if child SearchBar component exists', ()=>{
+    test('check if child SearchBar component exists', async()=>{
         expect(wrapper.getComponent(SearchBar)).toBeDefined();
+        expect(actions.getRecipes.mock.calls).toHaveLength(1)
+        wrapper.vm.handleSearch('Pancakes')
+        expect(actions.getRecipes.mock.calls).toHaveLength(1)
     })
 
     test('check if child Recipe List component exists', ()=>{
